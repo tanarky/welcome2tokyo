@@ -1,0 +1,31 @@
+{% if page and page.key.id() %}
+<div class="form-group">
+  <label for="exampleInputEmail1">ID</label>
+  <input type="text" class="form-control" value="{{ page.key.id() }}" disabled>
+</div>
+{% endif %}
+<div class="form-group">
+  <label for="exampleInputEmail1">Title</label>
+  <input name="title" type="text" class="form-control" placeholder="Page tile" value="{{ page.title }}">
+</div>
+<div class="form-group">
+  <label for="exampleInputEmail1">Body</label>
+  <textarea name="body" class="form-control html" rows="6">{{ page.body }}</textarea>
+</div>
+<div class="form-group">
+  <label>Published at</label>
+  <input id="published_at" name="published_at" type="text" class="form-control" value="{{ page.published_at }}">
+</div>
+<button type="submit" class="btn btn-default">
+  {% if page.title %}
+  Save
+  {% else %}
+  Create
+  {% endif %}
+</button>
+<script>
+$(function () {
+    $('#published_at').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+});</script>

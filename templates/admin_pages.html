@@ -1,0 +1,39 @@
+{% extends "admin_layout.html" %}
+{% block body %}
+<div class="box">
+  <div class="box-header">
+    <h1 class="box-title">Pages</h1>
+  </div>
+  <div class="box-body table-responsive">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Published at</th>
+            <th>Updated at</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in T['pages'] %}
+          <tr>
+            <td>
+              <a href="{{ url_for('app_admin.pages_edit', page_id=p.key.id()) }}">
+                {{ p.title }}
+              </a>
+            </td>
+            <td>{{ p.published_at }}</td>
+            <td>{{ p.updated_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="box-footer">
+    <a class="btn btn-default" href="{{ url_for('app_admin.pages_new') }}">
+      create page
+    </a>
+  </div>
+</div>
+{% endblock %}
