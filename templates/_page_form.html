@@ -16,13 +16,18 @@
   <label>Published at</label>
   <input id="published_at" name="published_at" type="text" class="form-control" value="{{ page.published_at }}">
 </div>
-<button type="submit" class="btn btn-default">
-  {% if page.title %}
-  Save
-  {% else %}
-  Create
-  {% endif %}
-</button>
+<div class="btn-group">
+  <a class="btn btn-default" href="{{ url_for('app_admin.pages') }}">
+    back to pages
+  </a>
+  <button type="submit" class="btn btn-primary">
+    {% if page.title %}
+    Save
+    {% else %}
+    Create
+    {% endif %}
+  </button>
+</div>
 <script>
 $(function () {
     $('#published_at').datetimepicker({
