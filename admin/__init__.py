@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, current_
 import logging, sys, os, traceback
 from datetime import datetime, tzinfo
 from models import Page, PagePhoto
+from google.appengine.ext import blobstore
 
 app_admin = Blueprint('app_admin', __name__, url_prefix='/admin')
 
@@ -22,7 +23,10 @@ def pages_new():
 @app_admin.route('/pages/<page_id>/edit', methods=['GET'])
 def pages_edit(page_id):
     p = Page().get_by_id(int(page_id))
-    return render_template('admin_pages_edit.html', T={'page':p})
+    img_upload_url = blobstore.create_upload_url(url_for('app_admin.page_images_upload', page_id=page_id))
+    current_app.logger.info(img_upload_url)
+    return render_template('admin_pages_edit.html', T={'page':p,
+                                                       'img_upload_url': img_upload_url})
 
 @app_admin.route('/pages/<page_id>', methods=['POST'])
 def pages_update(page_id):
@@ -57,3 +61,15 @@ def pages_create():
         current_app.logger.info(e)
         flash('page save error', 'error')
     return redirect(url_for('app_admin.pages'))
+
+@app_admin.route('/pages/<page_id>/images', methods=['POST'])
+def page_images_upload(page_id):
+    try:
+        p = Page().get_by_id(int(page_id))
+        f = request.files
+        current_app.logger.info(f)
+        flash('page image uploaded', 'success')
+    except Exception as e:
+        current_app.logger.info(e)
+        flash('page save error', 'error')
+    return redirect(url_for('app_admin.pages_edit', page_id=page_id))
