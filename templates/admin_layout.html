@@ -3,18 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Flask</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css" integrity="sha256-lrbt+EtA5LBekt2urIreC9u+QqzGsLKb0wEa+KgfVKA=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-blue-light.css" integrity="sha256-jPkltdqKGuVeCgp0Z6kyqFLbBQ136zqMdQm/d9smfh4=" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js" integrity="sha256-eme2xNun7OtlBK9zw3ohsdkqhvczHIXXAkujb8r/YjY=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.6.2/tinymce.min.js" integrity="sha256-2CYDovyc1Zpinmgee9ypFfy1unO1A6N+JRQ5a0L2aw4=" crossorigin="anonymous"></script>
+    {% include "_admin_styles_and_scripts.html" %}
   </head>
   <body class="skin-blue-light">
     <div class="wrapper">
@@ -29,16 +18,20 @@
 
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              <li class="dropdown user user-menu">
+              <li class="dropdown notifications-menu">
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                  email
+                  {{ T.user.email }}
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="user-body">
-                    <a class="btn btn-block btn-default btn-flat sign-out" href="#">
-                      <i class="fa fa-sign-out"></i>
-                      Sign out
-                    </a>
+                  <li>
+                    <ul class="menu">
+                      <li>
+                        <a href="{{ T.user.logout_url }}">
+                          <i class="fa fa-sign-out"></i>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flask</title>
+    {% include "_admin_styles_and_scripts.html" %}
+  </head>
+  <body class="skin-blue-light">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <section class="content">
+          <div class="error-page">
+            <h2 class="headline text-yellow" style="margin:0">401</h2>
+            <div class="error-content">
+              <h3><i class="fa fa-warning text-yellow"></i> Oops! Unauthorized</h3>
+              <p style="font-size:small">管理者権限を持つユーザでログインするか、管理者までお問合わせください</p>
+              <p>
+                <div class="btn-group">
+                  <a href="/" class="btn btn-flat btn-default">Back to top page</a>
+                  <a href="{{ T.admin_login_url }}" class="btn btn-flat btn-warning">
+                    <i class="fa fa-sign-in"></i>
+                    Login
+                  </a>
+                </div>
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">Version1.0</div>
+        <strong>Copyright &copy; 2016 All rights reserved.</strong>
+      </footer>
+    </div>
+  </body>
+</html>

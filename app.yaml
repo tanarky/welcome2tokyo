@@ -1,6 +1,9 @@
 runtime: python27
 api_version: 1
 threadsafe: true
+env_variables:
+  FLASK_SECRET_KEY: tanarky
+  CLOUD_STORAGE_BUCKET: your-bucket-name
 
 handlers:
 - url: /.*

@@ -1,9 +1,10 @@
 # coding: utf-8
 from flask import Flask, render_template
+import os
 from admin import app_admin
 
 app = Flask(__name__)
-app.secret_key = 'tanarky'
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 app.debug = True
 app.register_blueprint(app_admin)
 
