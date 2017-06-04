@@ -3,7 +3,7 @@ api_version: 1
 threadsafe: true
 env_variables:
   FLASK_SECRET_KEY: tanarky
-  CLOUD_STORAGE_BUCKET: your-bucket-name
+#  BUCKET_NAME: welcome-to-tokyo.appspot.com
 
 handlers:
 - url: /.*

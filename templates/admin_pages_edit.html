@@ -1,4 +1,13 @@
 {% extends "admin_layout.html" %}
+{% block title %}Edit Page{% endblock %}
+{% block breadcrumb %}
+<li>
+  <a href="{{ url_for('app_admin.pages') }}">
+    <i class="fa fa-files-o"></i> Pages
+  </a>
+</li>
+<li class="active"><i class="fa fa-pencil"></i> Edit</li>
+{% endblock %}
 {% block body %}
 <div class="row">
   <div class="col-md-8">
@@ -25,10 +34,12 @@
   <div class="col-md-4">
     <div class="box">
       <div class="box-header">
-        <h2 class="box-title">Images</h2>
+        <h2 class="box-title">Page images</h2>
       </div>
       <div class="box-body">
+        {% with imgs=T.imgs %}
         {% include "_2col_page_images.html" %}
+        {% endwith %}
       </div>
       <div class="box-footer">
         <form method="POST" enctype="multipart/form-data" action="{{ T.img_upload_url }}">

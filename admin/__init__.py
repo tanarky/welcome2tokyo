@@ -12,7 +12,13 @@ app_admin = Blueprint('app_admin', __name__, url_prefix='/admin')
 @app_admin.route('/401.html')
 def admin_401():
     T = {'admin_login_url': helper.admin_login_url()}
-    return render_template('errors_401.html', T=T)
+    return render_template('admin_401.html', T=T)
+
+@app_admin.route('/login_callback', methods=['GET'])
+@helper.admin_required
+def login_callback(user):
+    flash('login successfully', 'success')
+    return redirect(url_for('app_admin.top'))
 
 @app_admin.route('/', methods=['GET'])
 @helper.admin_required
@@ -24,7 +30,8 @@ def top(user):
 @helper.admin_required
 def pages(user):
     pages = Page().query(Page.page_type == 'article').order(-Page.updated_at)
-    T = {'user': user, 'pages': pages}
+    T = {'user': user,
+         'pages': pages}
     return render_template('admin_pages.html', T=T)
 
 @app_admin.route('/pages/new', methods=['GET'])
@@ -37,8 +44,14 @@ def pages_new(user):
 @helper.admin_required
 def pages_edit(user, page_id):
     p = Page().get_by_id(int(page_id))
-    img_upload_url = '/'
-    T = {'page':p, 'img_upload_url': img_upload_url, 'user': user}
+    img_upload_url = url_for('app_admin.page_images_upload',
+                             page_id=page_id)
+    imgs = helper.get_page_imgs(page_id)
+    current_app.logger.info(imgs)
+    T = {'page':p,
+         'img_upload_url': img_upload_url,
+         'imgs': imgs,
+         'user': user}
     return render_template('admin_pages_edit.html', T=T)
 
 @app_admin.route('/pages/<page_id>', methods=['POST'])
@@ -82,8 +95,12 @@ def pages_create(user):
 def page_images_upload(user, page_id):
     try:
         p = Page().get_by_id(int(page_id))
-        f = request.files
+        f = request.files['image']
         current_app.logger.info(f)
+        current_app.logger.info(f.filename)
+        current_app.logger.info(f.content_type)
+        helper.save_page_img(page_id, f.filename,
+                             f.read(), f.content_type)
         flash('page image uploaded', 'success')
     except Exception as e:
         current_app.logger.info(e)
