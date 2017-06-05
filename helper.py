@@ -34,7 +34,7 @@ def get_page_imgs(page_id, bucket=None):
 
     ret = []
     page_size = 100
-    prefix = "/".join(['', bucket, str(page_id), ''])
+    prefix = "/".join(['', bucket, 'img', str(page_id), ''])
     current_app.logger.info(prefix)
     stats = cloudstorage.listbucket(prefix, max_keys=page_size)
     while True:
@@ -73,5 +73,5 @@ def save_file(name, body, content_type, bucket=None):
         cloudstorage_file.write(body)
 
 def save_page_img(page_id, name, body, content_type, bucket=None):
-    path = "/".join([str(page_id), name])
+    path = "/".join(["img", str(page_id), name])
     save_file(path, body, content_type, bucket)
