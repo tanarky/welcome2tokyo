@@ -2,6 +2,7 @@
 from flask import Flask, Blueprint, render_template, flash, redirect, url_for, current_app, request
 import logging, sys, os, traceback
 import cloudstorage
+import re
 from datetime import datetime, tzinfo
 from models import Page, PagePhoto
 from google.appengine.ext import blobstore
@@ -41,7 +42,8 @@ def get_page_imgs(page_id, bucket=None):
         count = 0
         for stat in stats:
             count += 1
-            ret.append(img_full_url(stat.filename))
+            ret.append({"url": img_full_url(stat.filename),
+                        "name": re.sub(r'^(.*/)', '', stat.filename)})
 
         if count != page_size or count == 0:
             break
