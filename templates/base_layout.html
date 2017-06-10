@@ -1,15 +1,23 @@
 <!doctype html>
-<title>Flask</title>
-<div>
-  {% with messages = get_flashed_messages(with_categories=True) %}
-  {% if messages %}
-  {% for category, message in messages %}
-  <div class="alert alert-{{ category }}">{{ message }}</div>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
-
-  <h1>Flask</h1>
-  <div>
-  {% block body %}{% endblock %}
-</div>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flask</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <div>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <h1>Flask</h1>
+      <div>
+        {% block body %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

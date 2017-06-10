@@ -36,14 +36,13 @@ def get_page_imgs(page_id, bucket=None):
     ret = []
     page_size = 100
     prefix = "/".join(['', bucket, 'img', str(page_id), ''])
-    current_app.logger.info(prefix)
     stats = cloudstorage.listbucket(prefix, max_keys=page_size)
     while True:
         count = 0
         for stat in stats:
             count += 1
-            ret.append({"url": img_full_url(stat.filename),
-                        "name": re.sub(r'^(.*/)', '', stat.filename)})
+            ret.append({"value": img_full_url(stat.filename),
+                        "title": re.sub(r'^(.*/)', '', stat.filename)})
 
         if count != page_size or count == 0:
             break

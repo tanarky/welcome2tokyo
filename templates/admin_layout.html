@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Admin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     {% include "_admin_styles_and_scripts.html" %}
   </head>
   <body class="skin-blue-light">
@@ -85,9 +86,18 @@ tinymce.init({
     selector: 'textarea.html',
     statusbar: false,
     height: 500,
-    plugins: ['link', 'image', 'code', 'pagebreak', 'paste', 'lists', 'advlist'],
+    plugins: ['link',
+              'image',
+              'code',
+              'pagebreak',
+              'paste',
+              'lists',
+              'advlist'],
     style_formats: [
-        { title: 'Headers', items: [{ title: 'h2', block: 'h2' }, { title: 'h3', block: 'h3' }, { title: 'h4', block: 'h4' }] }
+        { title: 'Headers',
+          items: [{ title: 'h2', block: 'h2' },
+                  { title: 'h3', block: 'h3' },
+                  { title: 'h4', block: 'h4' }] }
     ],
     // http://stackoverflow.com/questions/9327849/tinymce-image-resize-use-css-instead-of-img-width-height
     // https://gist.github.com/simshaun/7592631
@@ -105,6 +115,7 @@ tinymce.init({
     toolbar: [ 'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | bullist numlist | pagebreak code' ],
     advlist_bullet_styles: "default",
     advlist_number_styles: "default",
+    image_list: "image_list",
 });
 </script>
   </body>

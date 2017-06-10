@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import Flask, Blueprint, render_template, flash, redirect, url_for, current_app, request
+from flask import Flask, Blueprint, render_template, flash, redirect, url_for, current_app, request, jsonify
 import logging, sys, os, traceback
 from datetime import datetime, tzinfo
 from models import Page, PagePhoto
@@ -47,12 +47,18 @@ def pages_edit(user, page_id):
     img_upload_url = url_for('app_admin.page_images_upload',
                              page_id=page_id)
     imgs = helper.get_page_imgs(page_id)
-    current_app.logger.info(imgs)
     T = {'page':p,
          'img_upload_url': img_upload_url,
          'imgs': imgs,
          'user': user}
     return render_template('admin_pages_edit.html', T=T)
+
+@app_admin.route('/pages/<page_id>/image_list', methods=['GET'])
+@helper.admin_required
+def pages_image_list(user, page_id):
+    p = Page().get_by_id(int(page_id))
+    imgs = helper.get_page_imgs(page_id)
+    return jsonify(imgs)
 
 @app_admin.route('/pages/<page_id>', methods=['POST'])
 @helper.admin_required
