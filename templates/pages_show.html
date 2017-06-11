@@ -1,0 +1,11 @@
+{% extends "base_layout.html" %}
+{% block body %}
+<div>{{ url_for('app_admin.top', _external=True) }}</div>
+<b>hello</b>
+
+<h2>{{ T.page.title }}</h2>
+
+<div>
+  {{ T.page.body | safe }}
+</div>
+{% endblock %}

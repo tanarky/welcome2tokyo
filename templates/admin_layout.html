@@ -105,8 +105,9 @@ tinymce.init({
         editor.on('init', function(args) {
             editor = args.target;
             editor.on('NodeChange', function(e) {
+                console.log('changed');
                 if (e && e.element.nodeName.toLowerCase() == 'img') {
-                    tinyMCE.DOM.setAttribs(e.element, {'width': null, 'height': null});
+                    tinyMCE.DOM.setAttribs(e.element, {'class': 'img-responsive'});
                 }
             });
         });
