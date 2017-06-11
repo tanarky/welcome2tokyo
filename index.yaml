@@ -2,12 +2,6 @@ indexes:
 
 - kind: Page
   properties:
-  - name: page_type
-  - name: published_at
-    direction: desc
-
-- kind: Page
-  properties:
   - name: tags
   - name: published_at
     direction: desc
@@ -17,3 +11,11 @@ indexes:
   - name: page_type
   - name: updated_at
     direction: desc
+
+- kind: Page
+  properties:
+  - name: is_pickup
+  - name: page_type
+  - name: published_at
+    direction: desc
+
