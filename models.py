@@ -10,7 +10,7 @@ class Page(ndb.Model):
     title        = ndb.StringProperty()
     body         = ndb.TextProperty()
     tags         = ndb.StringProperty(repeated=True)
-    photos       = ndb.StructuredProperty(PagePhoto, repeated=True)
+    thumbnail    = ndb.StringProperty()
     published_at = ndb.DateTimeProperty()
     page_type    = ndb.StringProperty(choices=['static', 'article'], default="article")
     updated_at   = ndb.DateTimeProperty(auto_now=True)

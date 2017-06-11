@@ -65,11 +65,13 @@ def pages_image_list(user, page_id):
 def pages_update(user, page_id):
     try:
         p = Page().get_by_id(int(page_id))
-        p.title     = request.form['title']
-        p.body      = request.form['body']
-        p.page_type = request.form['page_type']
-        if request.form['published_at'] and request.form['published_at'] != '':
-            d = datetime.strptime(request.form['published_at'],
+        p.title     = request.form.get('title')
+        p.body      = request.form.get('body')
+        p.page_type = request.form.get('page_type')
+        p.tags      = request.form.get('tags',"").split(",")
+        p.thumbnail = request.form.get('thumbnail')
+        if request.form.get('published_at') and request.form.get('published_at') != '':
+            d = datetime.strptime(request.form.get('published_at'),
                                   '%Y-%m-%d %H:%M:%S')
             p.published_at = d
         p.put()

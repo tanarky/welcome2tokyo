@@ -6,5 +6,7 @@ env_variables:
 #  BUCKET_NAME: welcome-to-tokyo.appspot.com
 
 handlers:
+- url: /s
+  static_dir: static
 - url: /.*
   script: main.app

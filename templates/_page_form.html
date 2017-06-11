@@ -9,22 +9,37 @@
 </div>
 {% endif %}
 <div class="form-group">
-  <label for="exampleInputEmail1">Title</label>
+  <label for="">Title</label>
   <input name="title" type="text" class="form-control" placeholder="Page tile" value="{{ page.title }}">
+</div>
+<div class="form-group">
+  <label for="">Thumbnail</label>
+  <select name="thumbnail" class="form-control">
+    <option value="">NO IMAGE</option>
+    {% for img in T.imgs%}
+    <option value="{{ img.value }}" {% if img.value == T.page.thumbnail %}selected="selected"{% endif %}>{{ img.title }}</option>
+    {% endfor %}
+  </select>
 </div>
 <div class="form-group">
   <label for="exampleInputEmail1">Body</label>
   <textarea name="body" class="form-control html" rows="6">{{ page.body }}</textarea>
 </div>
 <div class="form-group">
+  <label>tags (Enterキーで入力完了)</label>
+  <input id="tags" name="tags" type="text" data-role="tagsinput" class="form-control" value="{{ page.tags | join(",") }}">
+</div>
+<div class="form-group">
   <label>Published at</label>
   <input id="published_at" name="published_at" type="text" class="form-control" value="{{ page.published_at }}">
 </div>
 <div class="btn-group">
-  <a class="btn btn-default" href="{{ url_for('app_admin.pages') }}">
+  <a class="btn btn-default btn-lg" href="{{ url_for('app_admin.pages') }}">
+    <i class="fa fa-chevron-circle-left"></i>
     back to pages
   </a>
-  <button type="submit" class="btn btn-primary">
+  <button type="submit" class="btn btn-primary btn-lg">
+    <i class="fa fa-database"></i>
     {% if page.title %}
     Save
     {% else %}
