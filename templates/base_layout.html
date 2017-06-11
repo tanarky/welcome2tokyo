@@ -2,28 +2,87 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Flask</title>
+    <title>Welcome to Tokyo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Shadows+Into+Light" rel="stylesheet">
+    <link href="/s/css/styles.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          {% with messages = get_flashed_messages(with_categories=True) %}
-          {% if messages %}
-          {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">{{ message }}</div>
-          {% endfor %}
-          {% endif %}
-          {% endwith %}
-          <h1>Flask</h1>
-          <div>
-            {% block body %}{% endblock %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button aria-controls="navbar" aria-expanded="true" class="navbar-toggle" data-target="#navbar" data-toggle="collapse" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="logo" href="/">Welcome to Tokyo</a>
+        </div>
+        <div class="section" id="page_list_top" name="Header Page List"><div class="widget PageList" data-version="2" id="PageList1">
+            <div aria-expanded="true" class="navbar-collapse collapse" id="navbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a href="#">あああ</a>
+                </li>
+                <li>
+                  <a href="#">いいい</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+    </nav>
+    {% block pickup %}{% endblock %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 main">
+          <div class="post">
+            {% block body %}{% endblock %}
+          </div>
+        </div>
+        <div class="col-sm-4 sub-column">
+        </div>
+      </div>
     </div>
+    <footer class="global-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>サイトマップ</h3>
+            <ul class="widget">
+              <li><a href="/p/terms.html">利用規約</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <h3>ソーシャルメディア</h3>
+            <ul class="widget">
+              <li>
+                <a href="https://www.facebook.com/">
+                  Facebook
+                  <i aria-hidden="true" class="fa fa-facebook-official"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/">
+                  Twitter
+                  <i aria-hidden="true" class="fa fa-twitter-square"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="foot no-items section" id="footer-1"></div>
+          <div class="col-sm-12 copyright">© tanarky All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>

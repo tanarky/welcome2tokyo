@@ -17,7 +17,7 @@
     {% with page = T.get('page', {}) %}
     <form method="POST" action="{{ url_for('app_admin.pages_create') }}">
       <input name="page_type" type="hidden" value="article">
-      {% include "_page_form.html" %}
+      {% include "_page_create.html" %}
     </form>
     {% endwith %}
   </div>

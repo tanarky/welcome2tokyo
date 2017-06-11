@@ -1,5 +1,19 @@
 {% extends "base_layout.html" %}
+{% block pickup %}
+<div class="container-fluid">
+  <div class="row">
+    {% for pickup in T.pickups %}
+    <div class="col-sm-4 tile" style="background-image: url({{ pickup.thumbnail}});">
+      <a href="{{ pickup.permalink() }}" style="display:block" class="title">
+        <h2>{{ pickup.title }}</h2>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
 {% block body %}
-<div>{{ url_for('app_admin.top', _external=True) }}</div>
-<b>hello</b>
+{% with pages=T.pages %}
+{% include "_2col_pages.html" %}
+{% endwith %}
 {% endblock %}

@@ -6,6 +6,7 @@ from models import Page, PagePhoto
 from google.appengine.ext import blobstore
 from functools import wraps
 import helper
+import time
 
 app_admin = Blueprint('app_admin', __name__, url_prefix='/admin')
 
@@ -43,7 +44,7 @@ def pages_new(user):
 @app_admin.route('/pages/<page_id>/edit', methods=['GET'])
 @helper.admin_required
 def pages_edit(user, page_id):
-    p = Page().get_by_id(int(page_id))
+    p = Page().get_by_id(page_id)
     img_upload_url = url_for('app_admin.page_images_upload',
                              page_id=page_id)
     imgs = helper.get_page_imgs(page_id)
@@ -56,7 +57,7 @@ def pages_edit(user, page_id):
 @app_admin.route('/pages/<page_id>/image_list', methods=['GET'])
 @helper.admin_required
 def pages_image_list(user, page_id):
-    p = Page().get_by_id(int(page_id))
+    p = Page().get_by_id(page_id)
     imgs = helper.get_page_imgs(page_id)
     return jsonify(imgs)
 
@@ -64,16 +65,22 @@ def pages_image_list(user, page_id):
 @helper.admin_required
 def pages_update(user, page_id):
     try:
-        p = Page().get_by_id(int(page_id))
+        p = Page().get_by_id(page_id)
         p.title     = request.form.get('title')
         p.body      = request.form.get('body')
         p.page_type = request.form.get('page_type')
-        p.tags      = request.form.get('tags',"").split(",")
+        p.is_pickup = bool(request.form.get('is_pickup'))
+        if request.form.get('tags', '') == '':
+            p.tags  = []
+        else:
+            p.tags  = request.form.get('tags').split(",")
         p.thumbnail = request.form.get('thumbnail')
         if request.form.get('published_at') and request.form.get('published_at') != '':
             d = datetime.strptime(request.form.get('published_at'),
                                   '%Y-%m-%d %H:%M:%S')
             p.published_at = d
+        else:
+            p.published_at = None
         p.put()
         flash('page updated', 'success')
     except Exception as e:
@@ -85,10 +92,14 @@ def pages_update(user, page_id):
 @helper.admin_required
 def pages_create(user):
     try:
+        page_id=request.form.get('page_id')
+        if page_id == None or page_id == '':
+            page_id = str(int(time.time()))
         p = Page(
-            title=request.form['title'],
-            body=request.form['body'],
-            page_type=request.form['page_type'],
+            id=page_id,
+            title=request.form.get('title'),
+            page_type=request.form.get('page_type'),
+            body='',
         )
         p.put()
         flash('page created', 'success')
@@ -102,7 +113,7 @@ def pages_create(user):
 @helper.admin_required
 def page_images_upload(user, page_id):
     try:
-        p = Page().get_by_id(int(page_id))
+        p = Page().get_by_id(page_id)
         f = request.files['image']
         current_app.logger.info(f)
         current_app.logger.info(f.filename)

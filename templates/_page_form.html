@@ -1,25 +1,41 @@
-{% if page and page.key.id() %}
-<div class="form-group">
-  <label for="">ID</label>
-  <input type="text" class="form-control" value="{{ page.key.id() }}" readonly="readonly">
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="">ID</label>
+      <input type="text" class="form-control" value="{{ page.key.id() }}" readonly="readonly">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="">Pickup ?</label>
+      <div class="checkbox">
+        <label>
+          <input name="is_pickup" type="checkbox" {% if page.is_pickup %}checked{% endif %}>
+          Yes
+        </label>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="form-group">
-  <label for="">Key</label>
-  <input type="text" class="form-control" value="{{ page.key.urlsafe() }}" readonly="readonly">
-</div>
-{% endif %}
-<div class="form-group">
-  <label for="">Title</label>
-  <input name="title" type="text" class="form-control" placeholder="Page tile" value="{{ page.title }}">
-</div>
-<div class="form-group">
-  <label for="">Thumbnail</label>
-  <select name="thumbnail" class="form-control">
-    <option value="">NO IMAGE</option>
-    {% for img in T.imgs%}
-    <option value="{{ img.value }}" {% if img.value == T.page.thumbnail %}selected="selected"{% endif %}>{{ img.title }}</option>
-    {% endfor %}
-  </select>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="">Title</label>
+      <input name="title" type="text" class="form-control" placeholder="Page tile" value="{{ page.title }}">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="">Thumbnail</label>
+      <select name="thumbnail" class="form-control">
+        <option value="">NO IMAGE</option>
+        {% for img in T.imgs%}
+        <option value="{{ img.value }}" {% if img.value == T.page.thumbnail %}selected="selected"{% endif %}>{{ img.title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
 </div>
 <div class="form-group">
   <label for="exampleInputEmail1">Body</label>

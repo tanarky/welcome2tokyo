@@ -1,0 +1,41 @@
+{% for page in pages %}
+  {% if loop.index0 % 2 == 0 %}
+  <div class="row" style="margin-bottom:5px;">
+  {% endif %}
+
+  <div class="col-sm-6">
+    <h2>{{ page.title }}</h2>
+    <div class="post-meta">
+      <p class="date">
+        <span class="published-at">
+          {{ page.published_at.strftime('%Y-%m-%d') }}
+        </span>
+      </p>
+      <span class="post-labels">
+        {% for t in page.tags %}
+        <a class="post-label btn btn-default" href="/search/label/{{ t | urlencode }}" rel="tag">{{ t }}</a>
+        {% endfor %}
+      </span>
+  </a>
+  </span>
+  </div>
+    <div class="post-body">
+      {{ page.snippet() | safe }}
+    </div>
+    <div class="post-footer">
+      <a class="read-more" href="{{ page.permalink() }}">
+        <i class="fa fa-arrow-right"></i>
+        続きを読む
+      </a>
+    </div>
+  </div>
+
+  {% if loop.index0 % 2 == 1 %}
+  </div>
+  {% endif %}
+
+  {% if loop.index == pages.count() and loop.index0 % 2 == 0 %}
+  </div>
+  {% endif %}
+{% endfor %}
+

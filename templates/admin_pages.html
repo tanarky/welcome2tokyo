@@ -13,14 +13,16 @@
       <table class="table table-bordered">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Title</th>
             <th>Published at</th>
             <th>Updated at</th>
           </tr>
         </thead>
         <tbody>
-          {% for p in T['pages'] %}
+          {% for p in T.pages %}
           <tr>
+            <td>{{ p.key.id() }}</td>
             <td>
               <a href="{{ url_for('app_admin.pages_edit', page_id=p.key.id()) }}">
                 {{ p.title }}
